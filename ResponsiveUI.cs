@@ -1,15 +1,15 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class ResponsiveUI : MonoBehaviour {
 
     public RectTransform.Axis mainAxis;
-    public Type typeOfResize = Type.Percentage;
+    public Unit resizeUnits = Unit.Percentage;
     public float size;
     public bool limitCrossAxis = false;
+    public Unit crossAxisUnits = Unit.Percentage;
     public float maxCrossSize;
-    public Type crossAxisTypeOfSize = Type.Percentage;
 
-    public enum Type
+    public enum Unit
     {
         Pixels,
         Percentage
@@ -20,8 +20,8 @@ public class ResponsiveUI : MonoBehaviour {
     {
         RectTransform rect = this.GetComponent<RectTransform>();
         rect.SetSizeWithCurrentAnchors(
-            mainAxis, 
-            typeOfResize == Type.Percentage ? GetPixelsForPercentage(mainAxis, size) : size
+            mainAxis,
+            resizeUnits == Unit.Percentage ? GetPixelsForPercentage(mainAxis, size) : size
         );
 
         if (limitCrossAxis)
@@ -30,7 +30,7 @@ public class ResponsiveUI : MonoBehaviour {
 
             rect.SetSizeWithCurrentAnchors(
                 crossAxis,
-                crossAxisTypeOfSize == Type.Percentage ? GetPixelsForPercentage(crossAxis, maxCrossSize) : maxCrossSize
+                crossAxisUnits == Unit.Percentage ? GetPixelsForPercentage(crossAxis, maxCrossSize) : maxCrossSize
             );
         }
 
