@@ -1,5 +1,5 @@
 # ResponsiveUI.cs
-A simple C# script which allows your gameobjects to be responsively resized on runtime.
+A simple C# script for Unity3D which allows your gameobjects to be responsively resized on runtime.
 
 ## Warning
 This script needs to be attached to a gameobject with a Rect Transform component.
