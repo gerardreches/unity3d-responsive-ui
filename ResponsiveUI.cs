@@ -19,20 +19,28 @@ public class ResponsiveUI : MonoBehaviour {
     void Start()
     {
         RectTransform rect = this.GetComponent<RectTransform>();
-        rect.SetSizeWithCurrentAnchors(
-            mainAxis,
-            resizeUnits == Unit.Percentage ? GetPixelsForPercentage(mainAxis, size) : size
-        );
-
-        if (limitCrossAxis)
+        if(rect != null)
         {
-            RectTransform.Axis crossAxis = (mainAxis == RectTransform.Axis.Horizontal) ? RectTransform.Axis.Horizontal : RectTransform.Axis.Vertical;
-
             rect.SetSizeWithCurrentAnchors(
-                crossAxis,
-                crossAxisUnits == Unit.Percentage ? GetPixelsForPercentage(crossAxis, maxCrossSize) : maxCrossSize
+                mainAxis,
+                resizeUnits == Unit.Percentage ? GetPixelsForPercentage(mainAxis, size) : size
             );
+
+            if (limitCrossAxis)
+            {
+                RectTransform.Axis crossAxis = (mainAxis == RectTransform.Axis.Horizontal) ? RectTransform.Axis.Horizontal : RectTransform.Axis.Vertical;
+
+                rect.SetSizeWithCurrentAnchors(
+                    crossAxis,
+                    crossAxisUnits == Unit.Percentage ? GetPixelsForPercentage(crossAxis, maxCrossSize) : maxCrossSize
+                );
+            }
         }
+        else
+        {
+            Debug.LogWarning("ResponsiveUI: GameObject with name " + gameObject.name + " has not a Rect Transform component, so it can't be resized");
+        }
+        
 
     }
 
